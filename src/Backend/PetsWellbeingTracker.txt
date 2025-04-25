@@ -1,0 +1,17 @@
+{
+  "sleep": {
+    "last_activity": "00:00",
+    "wake_time": "00:00"
+  },
+  "meals": {
+    "last_meal_time": "00:00"
+  },
+  "hydration": {
+    "total_ml_today": 0,
+    "last_drink_time": "00:00"
+  },
+  "exercise": {
+    "logs_today": 0
+  },
+  "tasks": []
+}
