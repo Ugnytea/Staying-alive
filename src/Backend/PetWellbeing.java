@@ -52,7 +52,7 @@ public class PetWellbeing {
         this.tasks = tasks;
     }
 
-    // === Inner Classes ===
+    //=== Inner Classes ===
 
     public static class Sleep {
         private String lastActivity = "00:00";
@@ -117,44 +117,6 @@ public class PetWellbeing {
 
         public void setLogsToday(int logsToday) {
             this.logsToday = logsToday;
-        }
-    }
-
-    public static class Task {
-        private String name;
-        private int durationMinutes;
-        private String loggedAt;
-
-        public Task() {}
-
-        public Task(String name, int durationMinutes, String loggedAt) {
-            this.name = name;
-            this.durationMinutes = durationMinutes;
-            this.loggedAt = loggedAt;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getDurationMinutes() {
-            return durationMinutes;
-        }
-
-        public void setDurationMinutes(int durationMinutes) {
-            this.durationMinutes = durationMinutes;
-        }
-
-        public String getLoggedAt() {
-            return loggedAt;
-        }
-
-        public void setLoggedAt(String loggedAt) {
-            this.loggedAt = loggedAt;
         }
     }
 }

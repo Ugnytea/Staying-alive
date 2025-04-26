@@ -4,15 +4,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class PetStats {
-    final String PetFilename = "PetsWellbeingTracker";
-
     public static void checkStats() {
         PetWellbeing pet = new PetWellbeing();
 
-    }
-
-    private static void getHashMap() {
-        
     }
 
     //Checks if it's a new day
