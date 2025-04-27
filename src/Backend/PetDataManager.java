@@ -8,7 +8,8 @@ import java.util.*;
 public class PetDataManager {
     static final String PET_FILENAME = "PetsWellbeingTracker";
 
-    public static Map<String, String> readPetData() throws IOException {
+    //Gets properties (key=values) from data file and turns it into HashMap, then converts it to PetWellbeing object for easier usage in the program
+    public static PetWellbeing readPetData() throws IOException {
         Map<String, String> petHM = new HashMap<>();
         Properties props = new Properties();
 
@@ -20,10 +21,11 @@ public class PetDataManager {
             petHM.put(key, props.getProperty(key));
         }
 
-        return petHM;
+        return fromHashMap(petHM);
     }
 
-    public static PetWellbeing fromHashMap(Map<String, String> hm) {
+    //Converts hashMap into PetWellbeing object
+    private static PetWellbeing fromHashMap(Map<String, String> hm) {
         PetWellbeing pet = new PetWellbeing();
 
         pet.getSleep().setLastActivity(hm.getOrDefault("sleep.lastActivity", "00:00"));
@@ -41,7 +43,19 @@ public class PetDataManager {
         return pet;
     }
 
-    public static Map<String, String> toHashMap(PetWellbeing pet) {
+    //Converts PetWellbeing object to HashMap and saves it in data file
+    public static void savePetData(PetWellbeing pet) throws IOException {
+        Properties props = new Properties();
+        props.putAll(toHashMap(pet));
+
+        try (FileOutputStream out = new FileOutputStream(PET_FILENAME)) {
+            props.store(out, "Pet Wellbeing Data (Auto Saved)");
+        }
+
+    }
+
+    //Converts PetWellbeing object into HashMap
+    private static Map<String, String> toHashMap(PetWellbeing pet) {
         Map<String, String> hm = new HashMap<>();
 
         hm.put("sleep.lastActivity", pet.getSleep().getLastActivity());
@@ -55,14 +69,6 @@ public class PetDataManager {
         return hm;
     }
 
-    public static void savePetData(Map<String, String> petHM) throws IOException {
-        Properties props = new Properties();
-        props.putAll(petHM);
 
-        try (FileOutputStream out = new FileOutputStream(PET_FILENAME)) {
-            props.store(out, "Pet Wellbeing Data (Auto Saved)");
-        }
-
-    }
 
 }
