@@ -3,12 +3,27 @@ package Backend;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
+
+/**
+ * This class handles reading from and writing to the user's data file.
+ * It manages all wellness activity logs for the current day,
+ * including sleep, meals, hydration, exercise, and tasks.
+ *
+ * Data is loaded from a properties file and mapped into a PetWellbeing object.
+ * Updates to user activities are saved back to the file.
+ */
 
 public class PetDataManager {
     static final String PET_FILENAME = "PetsWellbeingTracker";
 
-    //Gets properties (key=values) from data file and turns it into HashMap, then converts it to PetWellbeing object for easier usage in the program
+    /**
+     * Gets properties (key=values) from data file and turns it into HashMap
+     *
+     * @return PetWellbeing object converted from HashMap
+     * @throws IOException If an error occurs during file reading
+     */
     public static PetWellbeing readPetData() throws IOException {
         Map<String, String> petHM = new HashMap<>();
         Properties props = new Properties();
@@ -24,10 +39,10 @@ public class PetDataManager {
         return fromHashMap(petHM);
     }
 
-    //Converts hashMap into PetWellbeing object
     private static PetWellbeing fromHashMap(Map<String, String> hm) {
         PetWellbeing pet = new PetWellbeing();
 
+        pet.setLastSavedDate(hm.getOrDefault("date.lastSavedDate", "0000-00-00"));
         pet.getSleep().setLastActivity(hm.getOrDefault("sleep.lastActivity", "00:00"));
         pet.getSleep().setWakeTime(hm.getOrDefault("sleep.wakeTime", "00:00"));
         pet.getMeals().setLastMealTime(hm.getOrDefault("meals.lastMealTime", "00:00"));
@@ -43,7 +58,12 @@ public class PetDataManager {
         return pet;
     }
 
-    //Converts PetWellbeing object to HashMap and saves it in data file
+    /**
+     * Saves PetWellbeing object converted to HashMap in data file
+     *
+     * @param pet The object which content will be written in the file
+     * @throws IOException If an error occurs during file reading
+     */
     public static void savePetData(PetWellbeing pet) throws IOException {
         Properties props = new Properties();
         props.putAll(toHashMap(pet));
@@ -54,10 +74,13 @@ public class PetDataManager {
 
     }
 
-    //Converts PetWellbeing object into HashMap
     private static Map<String, String> toHashMap(PetWellbeing pet) {
+        // Updates pet's lastSavedDate to current date
+        pet.setLastSavedDate(LocalDate.now().toString());
+
         Map<String, String> hm = new HashMap<>();
 
+        hm.put("date.lastSavedDate", pet.getLastSavedDate());
         hm.put("sleep.lastActivity", pet.getSleep().getLastActivity());
         hm.put("sleep.wakeTime", pet.getSleep().getWakeTime());
         hm.put("meals.lastMealTime", pet.getMeals().getLastMealTime());
@@ -68,7 +91,4 @@ public class PetDataManager {
 
         return hm;
     }
-
-
-
 }

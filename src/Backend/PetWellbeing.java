@@ -5,6 +5,7 @@ import java.util.List;
 
 public class PetWellbeing {
 
+    private String lastSavedDate = "0000-00-00";
     private Sleep sleep = new Sleep();
     private Meals meals = new Meals();
     private Hydration hydration = new Hydration();
@@ -12,6 +13,16 @@ public class PetWellbeing {
     private List<String> tasks = new ArrayList<>();
 
     //Getters and Setters
+
+
+    public String getLastSavedDate() {
+        return lastSavedDate;
+    }
+
+    public void setLastSavedDate(String lastSavedDate) {
+        this.lastSavedDate = lastSavedDate;
+    }
+
     public Sleep getSleep() {
         return sleep;
     }
