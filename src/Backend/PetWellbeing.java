@@ -7,14 +7,12 @@ public class PetWellbeing {
 
     private String lastSavedDate = "0000-00-00";
     private Sleep sleep = new Sleep();
-    private Meals meals = new Meals();
+    private Nutrition nutrition = new Nutrition();
     private Hydration hydration = new Hydration();
     private Exercise exercise = new Exercise();
     private List<String> tasks = new ArrayList<>();
 
     //Getters and Setters
-
-
     public String getLastSavedDate() {
         return lastSavedDate;
     }
@@ -31,12 +29,12 @@ public class PetWellbeing {
         this.sleep = sleep;
     }
 
-    public Meals getMeals() {
-        return meals;
+    public Nutrition getNutrition() {
+        return nutrition;
     }
 
-    public void setMeals(Meals meals) {
-        this.meals = meals;
+    public void setNutrition(Nutrition nutrition) {
+        this.nutrition = nutrition;
     }
 
     public Hydration getHydration() {
@@ -77,23 +75,23 @@ public class PetWellbeing {
             this.lastActivity = lastSleepTime;
         }
 
-        public String getWakeTime() {
+        public String getWakeUpTime() {
             return wakeTime;
         }
 
-        public void setWakeTime(String wakeTime) {
+        public void setWakeUpTime(String wakeTime) {
             this.wakeTime = wakeTime;
         }
     }
 
-    public static class Meals {
+    public static class Nutrition {
         private String lastMealTime = "00:00";
 
-        public String getLastMealTime() {
+        public String getLastNutritionTime() {
             return lastMealTime;
         }
 
-        public void setLastMealTime(String lastMealTime) {
+        public void setLastNutritionTime(String lastMealTime) {
             this.lastMealTime = lastMealTime;
         }
     }

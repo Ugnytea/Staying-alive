@@ -21,10 +21,11 @@ public class PetDataManager {
     /**
      * Gets properties (key=values) from data file and turns it into HashMap
      *
+     * @param pet PetWellbeing object which content will be set
      * @return PetWellbeing object converted from HashMap
      * @throws IOException If an error occurs during file reading
      */
-    public static PetWellbeing readPetData() throws IOException {
+    public static PetWellbeing readPetData(PetWellbeing pet) throws IOException {
         Map<String, String> petHM = new HashMap<>();
         Properties props = new Properties();
 
@@ -36,16 +37,14 @@ public class PetDataManager {
             petHM.put(key, props.getProperty(key));
         }
 
-        return fromHashMap(petHM);
+        return fromHashMap(petHM, pet);
     }
 
-    private static PetWellbeing fromHashMap(Map<String, String> hm) {
-        PetWellbeing pet = new PetWellbeing();
-
+    private static PetWellbeing fromHashMap(Map<String, String> hm, PetWellbeing pet) {
         pet.setLastSavedDate(hm.getOrDefault("date.lastSavedDate", "0000-00-00"));
         pet.getSleep().setLastActivity(hm.getOrDefault("sleep.lastActivity", "00:00"));
-        pet.getSleep().setWakeTime(hm.getOrDefault("sleep.wakeTime", "00:00"));
-        pet.getMeals().setLastMealTime(hm.getOrDefault("meals.lastMealTime", "00:00"));
+        pet.getSleep().setWakeUpTime(hm.getOrDefault("sleep.wakeTime", "00:00"));
+        pet.getNutrition().setLastNutritionTime(hm.getOrDefault("meals.lastMealTime", "00:00"));
         pet.getHydration().setTotalMl(Integer.parseInt(hm.getOrDefault("hydration.totalMl", "0")));
         pet.getHydration().setLastDrinkTime(hm.getOrDefault("hydration.lastDrinkTime", "00:00"));
         pet.getExercise().setLogsToday(Integer.parseInt(hm.getOrDefault("exercise.logsToday", "0")));
@@ -61,8 +60,8 @@ public class PetDataManager {
     /**
      * Saves PetWellbeing object converted to HashMap in data file
      *
-     * @param pet The object which content will be written in the file
-     * @throws IOException If an error occurs during file reading
+     * @param pet PetWellbeing object which content will be saved
+     * @throws IOException If an error occurs during writing to file
      */
     public static void savePetData(PetWellbeing pet) throws IOException {
         Properties props = new Properties();
@@ -82,8 +81,8 @@ public class PetDataManager {
 
         hm.put("date.lastSavedDate", pet.getLastSavedDate());
         hm.put("sleep.lastActivity", pet.getSleep().getLastActivity());
-        hm.put("sleep.wakeTime", pet.getSleep().getWakeTime());
-        hm.put("meals.lastMealTime", pet.getMeals().getLastMealTime());
+        hm.put("sleep.wakeTime", pet.getSleep().getWakeUpTime());
+        hm.put("meals.lastMealTime", pet.getNutrition().getLastNutritionTime());
         hm.put("hydration.totalMl", String.valueOf(pet.getHydration().getTotalMl()));
         hm.put("hydration.lastDrinkTime", pet.getHydration().getLastDrinkTime());
         hm.put("exercise.logsToday", String.valueOf(pet.getExercise().getLogsToday()));
