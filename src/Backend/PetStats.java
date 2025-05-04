@@ -17,6 +17,7 @@ public class PetStats {
 
     private static boolean tired (PetWellbeing pet) {
         // Check if 7h have passed
+        //BAndom kazka cia prihimicinti
         return false;
     }
 
