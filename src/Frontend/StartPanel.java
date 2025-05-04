@@ -22,7 +22,7 @@ public class StartPanel extends JPanel {
         nameLabel.setForeground(Color.RED);
         info.setHorizontalAlignment(SwingConstants.CENTER);
         info.setBounds(100, 150, 400, 50);
-        add(info);   
+        add(info);
 
         // Start Button
         JButton startButton = new JButton("Start Game");
