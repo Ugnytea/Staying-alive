@@ -43,11 +43,12 @@ public class PetDataManager {
     private static PetWellbeing fromHashMap(Map<String, String> hm, PetWellbeing pet) {
         pet.setLastSavedDate(hm.getOrDefault("date.lastSavedDate", "0000-00-00"));
         pet.getSleep().setLastActivity(hm.getOrDefault("sleep.lastActivity", "00:00"));
-        pet.getSleep().setWakeUpTime(hm.getOrDefault("sleep.wakeTime", "00:00"));
-        pet.getNutrition().setLastNutritionTime(hm.getOrDefault("meals.lastMealTime", "00:00"));
+        pet.getSleep().setWakeUpTime(hm.getOrDefault("sleep.wakeUpTime", "00:00"));
+        pet.getNutrition().setLastNutritionTime(hm.getOrDefault("nutrition.lastNutritionTime", "00:00"));
         pet.getHydration().setTotalMl(Integer.parseInt(hm.getOrDefault("hydration.totalMl", "0")));
         pet.getHydration().setLastDrinkTime(hm.getOrDefault("hydration.lastDrinkTime", "00:00"));
         pet.getExercise().setLogsToday(Integer.parseInt(hm.getOrDefault("exercise.logsToday", "0")));
+        pet.getExercise().setLastExerciseTime(hm.getOrDefault("exercise.lastExerciseTime", "00:00"));
 
         String tasks = hm.getOrDefault("tasks", "");
         if (!tasks.isEmpty()) {
@@ -86,6 +87,7 @@ public class PetDataManager {
         hm.put("hydration.totalMl", String.valueOf(pet.getHydration().getTotalMl()));
         hm.put("hydration.lastDrinkTime", pet.getHydration().getLastDrinkTime());
         hm.put("exercise.logsToday", String.valueOf(pet.getExercise().getLogsToday()));
+        hm.put("exercise.lastExerciseTime", pet.getHydration().getLastDrinkTime());
         hm.put("tasks", String.join(",", pet.getTasks()));
 
         return hm;

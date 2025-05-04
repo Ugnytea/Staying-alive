@@ -26,5 +26,6 @@ public class Tools {
         pet.getHydration().setTotalMl(0);
         pet.getHydration().setLastDrinkTime("00:00");
         pet.getExercise().setLogsToday(0);
+        pet.getExercise().setLastExerciseTime("00:00");
     }
 }

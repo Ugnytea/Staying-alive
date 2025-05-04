@@ -65,7 +65,7 @@ public class PetWellbeing {
 
     public static class Sleep {
         private String lastActivity = "00:00";
-        private String wakeTime = "00:00";
+        private String wakeUpTime = "00:00";
 
         public String getLastActivity() {
             return lastActivity;
@@ -76,23 +76,23 @@ public class PetWellbeing {
         }
 
         public String getWakeUpTime() {
-            return wakeTime;
+            return wakeUpTime;
         }
 
-        public void setWakeUpTime(String wakeTime) {
-            this.wakeTime = wakeTime;
+        public void setWakeUpTime(String wakeUpTime) {
+            this.wakeUpTime = wakeUpTime;
         }
     }
 
     public static class Nutrition {
-        private String lastMealTime = "00:00";
+        private String lastNutritionTime = "00:00";
 
         public String getLastNutritionTime() {
-            return lastMealTime;
+            return lastNutritionTime;
         }
 
-        public void setLastNutritionTime(String lastMealTime) {
-            this.lastMealTime = lastMealTime;
+        public void setLastNutritionTime(String lastNutritionTime) {
+            this.lastNutritionTime = lastNutritionTime;
         }
     }
 
@@ -119,6 +119,7 @@ public class PetWellbeing {
 
     public static class Exercise {
         private int logsToday = 0;
+        private String lastExerciseTime = "00:00";
 
         public int getLogsToday() {
             return logsToday;
@@ -126,6 +127,14 @@ public class PetWellbeing {
 
         public void setLogsToday(int logsToday) {
             this.logsToday = logsToday;
+        }
+
+        public String getLastExerciseTime() {
+            return lastExerciseTime;
+        }
+
+        public void setLastExerciseTime(String lastExerciseTime) {
+            this.lastExerciseTime = lastExerciseTime;
         }
     }
 }
