@@ -16,7 +16,7 @@ import java.util.*;
  */
 
 public class PetDataManager {
-    static final String PET_FILENAME = "PetsWellbeingTracker";
+    static final String PET_FILENAME = "PetsWellbeingTracker.properties";
 
     /**
      * Gets properties (key=values) from data file and turns it into HashMap

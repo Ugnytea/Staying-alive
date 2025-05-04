@@ -14,7 +14,7 @@ public class GamePanel extends JPanel {
         add(new NutritionButton());
         add(new HydrationButton());
         add(new ExerciseButton());
-        add(new TasksButton());
+        add(new TaskButton());
         add(new CheckUpButton());
     }
 }

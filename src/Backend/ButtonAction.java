@@ -63,7 +63,7 @@ public class ButtonAction {
      *
      * @throws IOException If an error occurs during file reading or writing to it
      */
-    public static void updateExercise() throws IOException {
+    public static void updateExercise(String time) throws IOException {
         PetWellbeing pet = new PetWellbeing();
         prepToLogAction(pet);
 
