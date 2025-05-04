@@ -1,6 +1,7 @@
 package Backend;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * This is the main back-end class that gets called by front-end
@@ -95,16 +96,30 @@ public class ButtonAction {
     }
 
     /**
-     * Gets all pet's statistics
+     * Gives to-do list
      *
+     * @return A list of tasks
+     * @throws IOException If an error occurs during file reading or writing to it
+     */
+    public static List<String> getTasks() throws IOException {
+        PetWellbeing pet = new PetWellbeing();
+        prepToLogAction(pet);
+
+        return pet.getTasks();
+    }
+
+    /**
+     * Gets all pet's statistics in a list
+     *
+     * @return A list of pet's statistics in order of: if hungry, thirsty, tired, restless
      * @throws IOException If an error occurs during file reading
      */
-    public static void checkOnPet () throws IOException {
+    public static List<Boolean> checkOnPet () throws IOException {
         PetWellbeing pet = new PetWellbeing();
 
         prepToLogAction(pet);
 
-        //Gives back the statuses of: if hungry, thirsty, tired, restless.
+        return PetStats.checkStats(pet);
     }
 
     private static void prepToLogAction (PetWellbeing pet) throws IOException {
