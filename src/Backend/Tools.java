@@ -5,9 +5,9 @@ import java.time.LocalDate;
 public class Tools {
     /**
      * Checks if it's a new day and resets data if necessary
+     *
+     * @param pet PetWellbeing object which content will be reset
      */
-
-
     public static void checkIfNewDay(PetWellbeing pet) {
         LocalDate now = LocalDate.now();
 
