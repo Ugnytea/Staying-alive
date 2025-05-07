@@ -42,6 +42,7 @@ public class HydrationButton extends JButton {
                         JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                     }
                 } else {
+                    //check
                     JOptionPane.showMessageDialog(null, "No input provided.");
                 }
             }
