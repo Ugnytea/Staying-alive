@@ -99,7 +99,7 @@ public class PetDataManager {
         hm.put("hydration.totalMl", String.valueOf(pet.getHydration().getTotalMl()));
         hm.put("hydration.lastDrinkTime", pet.getHydration().getLastDrinkTime());
         hm.put("exercise.logsToday", String.valueOf(pet.getExercise().getLogsToday()));
-        hm.put("exercise.lastExerciseTime", pet.getHydration().getLastDrinkTime());
+        hm.put("exercise.lastExerciseTime", pet.getExercise().getLastExerciseTime());
         hm.put("tasks", String.join(",", pet.getTasks()));
 
         return hm;

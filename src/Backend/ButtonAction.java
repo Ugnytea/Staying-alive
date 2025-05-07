@@ -2,6 +2,7 @@ package Backend;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This is the main back-end class that gets called by front-end
@@ -70,6 +71,8 @@ public class ButtonAction {
         int totalExercise = 1 + pet.getExercise().getLogsToday();
         pet.getExercise().setLogsToday(totalExercise);
 
+        pet.getExercise().setLastExerciseTime(time);
+
         PetDataManager.savePetData(pet);
     }
 
@@ -114,7 +117,7 @@ public class ButtonAction {
      * @return A list of pet's statistics in order of: if hungry, thirsty, tired, restless
      * @throws IOException If an error occurs during file reading
      */
-    public static List<Boolean> checkOnPet () throws IOException {
+    public static Map<String, Boolean> checkOnPet () throws IOException {
         PetWellbeing pet = new PetWellbeing();
 
         prepToLogAction(pet);
