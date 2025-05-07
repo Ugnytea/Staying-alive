@@ -1,8 +1,6 @@
 package Backend;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -16,7 +14,7 @@ import java.util.*;
  */
 
 public class PetDataManager {
-    static final String PET_FILENAME = "PetsWellbeingTracker.properties";
+    static final String PET_FILENAME = "Staying-alive/src/Backend/PetsWellbeingTracker.properties";
 
     /**
      * Gets properties (key=values) from data file and turns it into HashMap
@@ -68,10 +66,24 @@ public class PetDataManager {
         Properties props = new Properties();
         props.putAll(toHashMap(pet));
 
-        try (FileOutputStream out = new FileOutputStream(PET_FILENAME)) {
-            props.store(out, "Pet Wellbeing Data (Auto Saved)");
-        }
+        List<String> orderedKeys = List.of(
+                "date.lastSavedDate",
+                "sleep.lastActivity",
+                "sleep.wakeTime",
+                "meals.lastMealTime",
+                "hydration.totalMl",
+                "hydration.lastDrinkTime",
+                "exercise.logsToday",
+                "exercise.lastExerciseTime",
+                "tasks"
+        );
 
+        try (PrintWriter writer = new PrintWriter(new FileWriter(PET_FILENAME))) {
+            writer.println("# Pet Wellbeing Data (Auto Saved)");
+            for (String key : orderedKeys) {
+                writer.println(key + "=" + props.getProperty(key));
+            }
+        }
     }
 
     private static Map<String, String> toHashMap(PetWellbeing pet) {
