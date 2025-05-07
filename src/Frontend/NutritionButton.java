@@ -20,28 +20,34 @@ public class NutritionButton extends JButton {
                 // Ask for ml of water
                 String input = JOptionPane.showInputDialog(null, "When was the last time You ate (HH:mm)?");
 
-                if (input != null && !input.trim().isEmpty()) {
-                    try {
-                        String time = input.trim();
+                if (input != null) {
+                    input = input.trim();
 
-                        if (!time.matches("^([01]?\\d|2[0-3]):[0-5]\\d$")) {
-                            JOptionPane.showMessageDialog(null, "Please enter time in format - HH:mm");
-                            return;
+
+                    if (input != null && !input.trim().isEmpty()) {
+                        try {
+                            String time = input.trim();
+
+                            if (!time.matches("^([01]?\\d|2[0-3]):[0-5]\\d$")) {
+                                JOptionPane.showMessageDialog(null, "Please enter time in format - HH:mm");
+                                return;
+                            }
+
+                            // Call backend
+                            ButtonAction.updateNutrition(time);
+
+                            JOptionPane.showMessageDialog(null, "Information updated!\n");
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, "Please enter a number.");
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                         }
-
-                        // Call backend
-                        ButtonAction.updateNutrition(time);
-
-                        JOptionPane.showMessageDialog(null, "Information updated!\n");
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Please enter a number.");
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No input provided.");
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "No input provided.");
                 }
             }
+
         });
     }
 }

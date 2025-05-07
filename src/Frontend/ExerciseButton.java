@@ -33,6 +33,8 @@ public class ExerciseButton extends JButton {
                         } catch (IOException ex) {
                             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                         }
+                    } else if (answer.equals("no")) {
+                        JOptionPane.showMessageDialog(null, "No exercise logged.");
                     } else {
                         JOptionPane.showMessageDialog(null, "No input provided.");
                     }
