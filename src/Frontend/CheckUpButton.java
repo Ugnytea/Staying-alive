@@ -9,8 +9,20 @@ import java.util.Map;
 
 import Backend.ButtonAction;
 
-public class CheckUpButton extends JButton {
+/**
+ * CheckUpButton is a custom JButton that, when clicked,
+ * displays the current health and wellbeing status of the user's virtual pet.
+ *
+ * It retrieves pet status data from the backend (via ButtonAction)
+ * and shows a message dialog summarizing the pet's condition (e.g., tired, hungry).
+ */
 
+
+public class CheckUpButton extends JButton {
+    /**
+     * Constructs a CheckUpButton with the label "How is Your pet doing?".
+     * Adds an action listener that fetches and displays the pet's status.
+     */
     public CheckUpButton() {
         super("How is Your pet doing?");
         addActionListener(new ActionListener() {

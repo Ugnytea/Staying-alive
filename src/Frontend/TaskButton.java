@@ -8,8 +8,15 @@ import java.util.List;
 
 import Backend.ButtonAction;
 
+/**
+ * TaskButton represents a button that allows the user to manage tasks.
+ * The user can add new tasks, view existing tasks or mark tasks as complete.
+ */
 public class TaskButton extends JButton {
-
+    /**
+     * Constructs the TaskButton and adds an action listener that presents the user
+     * with options to manage tasks.
+     */
     public TaskButton() {
         super("Tasks");
 
@@ -29,13 +36,13 @@ public class TaskButton extends JButton {
                 );
 
                 switch (choice) {
-                    case 0: // Add
+                    case 0:
                         addTask();
                         break;
-                    case 1: // View
+                    case 1:
                         viewTasks();
                         break;
-                    case 2: // Complete
+                    case 2:
                         completeTask();
                         break;
                     default:

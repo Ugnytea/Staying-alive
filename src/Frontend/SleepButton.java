@@ -6,9 +6,15 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+/**
+ * SleepButton is a custom JButton used to collect and log the user's wake-up time.
+ * When clicked, it prompts the user to input the time they woke up (in HH:mm format).
+ */
 public class SleepButton extends JButton {
-
+    /**
+     * Constructs the SleepButton with appropriate label and action listener.
+     * It handles input validation and updates the backend with the user's wake-up time.
+     */
     public SleepButton() {
         super("Sleep");
 

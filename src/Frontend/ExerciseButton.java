@@ -8,9 +8,20 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+/**
+ * ExerciseButton is a custom JButton that prompts the user
+ * to confirm whether they exercised. If the user answers "yes",
+ * the current time is recorded and passed to the backend for logging.
+ *
+ */
+
 
 public class ExerciseButton extends JButton {
-
+    /**
+     * Constructs an ExerciseButton labeled "Exercise".
+     * Adds a dialog prompt on click, and if the user confirms exercise,
+     * logs the time via the backend.
+     */
     public ExerciseButton() {
         super("Exercise");  // Set the button's text
 

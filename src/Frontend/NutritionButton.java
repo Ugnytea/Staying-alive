@@ -8,9 +8,16 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * NutritionButton is a custom JButton that prompts the user to input
+ * the time they last ate and updates this information using the backend logic.
+ */
 public class NutritionButton extends JButton {
-
+    /**
+     * Constructs a NutritionButton with labeled text and registers an action listener.
+     * When clicked, it prompts the user to input the time of their last meal and
+     * sends the data to the backend.
+     */
     public NutritionButton() {
         super("Nutrition");  // Set the button's text
 

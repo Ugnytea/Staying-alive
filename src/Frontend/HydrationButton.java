@@ -8,9 +8,16 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import Backend.ButtonAction;
-
+/**
+ * HydrationButton represents a button in the GUI that allows the user
+ * to log their water intake. The user inputs the amount of water in ml
+ * and the time of intake (in HH:mm format).
+ */
 public class HydrationButton extends JButton {
-
+    /**
+     * Constructs the HydrationButton and attaches an action listener
+     * that prompts the user for water intake data and logs it.
+     */
     public HydrationButton() {
         super("Hydration");
 

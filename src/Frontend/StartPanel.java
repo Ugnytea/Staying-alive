@@ -3,9 +3,18 @@ package Frontend;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+/**
+ * StartPanel is the opening screen of the application.
+ * It introduces the game to the user with a message, a description
+ * and a button to proceed to the main game panel.
+ */
 public class StartPanel extends JPanel {
-
+    /**
+     * Constructs the start screen with a title, informational text
+     * and a start button. Clicking the button transitions to the GamePanel.
+     *
+     * @param frame the main application frame to allow switching panels
+     */
     public StartPanel(MainFrame frame) {
         setLayout(null);
 
