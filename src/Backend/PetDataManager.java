@@ -78,7 +78,7 @@ public class PetDataManager {
         List<String> orderedKeys = List.of(
                 "date.lastSavedDate",
                 "sleep.lastActivity",
-                "sleep.wakeTime",
+                "sleep.wakeUpTime",
                 "nutrition.lastNutritionTime",
                 "hydration.totalMl",
                 "hydration.lastDrinkTime",
@@ -105,7 +105,7 @@ public class PetDataManager {
 
         hm.put("date.lastSavedDate", pet.getLastSavedDate());
         hm.put("sleep.lastActivity", pet.getSleep().getLastActivity());
-        hm.put("sleep.wakeTime", pet.getSleep().getWakeUpTime());
+        hm.put("sleep.wakeUpTime", pet.getSleep().getWakeUpTime());
         hm.put("nutrition.lastNutritionTime", pet.getNutrition().getLastNutritionTime());
         hm.put("hydration.totalMl", String.valueOf(pet.getHydration().getTotalMl()));
         hm.put("hydration.lastDrinkTime", pet.getHydration().getLastDrinkTime());

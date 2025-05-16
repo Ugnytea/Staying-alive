@@ -34,11 +34,8 @@ public class PetStats {
     }
 
     private static boolean isTired(PetWellbeing pet) {
-        String lastActivity = pet.getSleep().getLastActivity();
-        String wakeUpTime = pet.getSleep().getWakeUpTime();
-
-        LocalTime fellAsleep = Tools.parseTime(lastActivity);
-        LocalTime wakeUp = Tools.parseTime(wakeUpTime);
+        LocalTime fellAsleep = Tools.parseTime(pet.getSleep().getLastActivity());
+        LocalTime wakeUp = Tools.parseTime(pet.getSleep().getWakeUpTime());
         LocalTime now = LocalTime.now();
 
         if (fellAsleep == wakeUp) return true;
@@ -49,7 +46,7 @@ public class PetStats {
         long awakeTime = Duration.between(wakeUp, now).toHours();
         if (awakeTime < 0) awakeTime += 24;
 
-        return sleepTime < 7 && awakeTime >= 14;
+        return sleepTime < 7 || awakeTime >= 14;
     }
 
     private static boolean isHungry(PetWellbeing pet) {
@@ -64,14 +61,19 @@ public class PetStats {
 
     private static boolean isThirsty(PetWellbeing pet) {
         LocalTime lastDrink = Tools.parseTime(pet.getHydration().getLastDrinkTime());
+        LocalTime wakeUp = Tools.parseTime(pet.getSleep().getWakeUpTime());
         LocalTime now = LocalTime.now();
 
-        int ml = pet.getHydration().getTotalMl();
+        int mlDrunk = pet.getHydration().getTotalMl();
+
+        long hoursAwake = Duration.between(wakeUp, now).toHours();
+        if (hoursAwake < 0) hoursAwake += 24;
+        int requiredMl = (int) (hoursAwake * 50);
 
         long hoursPassed = Duration.between(lastDrink, now).toHours();
         if (hoursPassed < 0) hoursPassed += 24;
 
-        return hoursPassed >= 4 || ml == 0;
+        return hoursPassed >= 4 || mlDrunk < requiredMl;
     }
 
     private static boolean isRestless(PetWellbeing pet) {
