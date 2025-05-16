@@ -2,7 +2,6 @@ package Backend;
 
 import java.time.Duration;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -10,28 +9,35 @@ public class PetStats {
     public static Map<String, Boolean> checkStats(PetWellbeing pet) {
         Map<String, Boolean> stats = new LinkedHashMap<>();
 
-        stats.put("tired", tired(pet));
-        stats.put("hungry", hungry(pet));
-        stats.put("thirsty", thirsty(pet));
-        stats.put("restless", restless(pet));
+        stats.put("tired", isTired(pet));
+        stats.put("hungry", isHungry(pet));
+        stats.put("thirsty", isThirsty(pet));
+        stats.put("restless", isRestless(pet));
 
         return stats;
     }
 
-    private static boolean tired (PetWellbeing pet) {
+    private static boolean isTired(PetWellbeing pet) {
         String lastActivity = pet.getSleep().getLastActivity();
         String wakeUpTime = pet.getSleep().getWakeUpTime();
-        LocalTime fellAsleep = parseTime(lastActivity);
-        LocalTime wakeUp = parseTime(wakeUpTime);
 
-        long hoursPassed = Duration.between(fellAsleep, wakeUp).toHours();
-        if (hoursPassed < 0) hoursPassed += 24;
+        LocalTime fellAsleep = Tools.parseTime(lastActivity);
+        LocalTime wakeUp = Tools.parseTime(wakeUpTime);
+        LocalTime now = LocalTime.now();
 
-        return hoursPassed >= 7;
+        if (fellAsleep == wakeUp) return true;
+
+        long sleepTime = Duration.between(fellAsleep, wakeUp).toHours();
+        if (sleepTime < 0) sleepTime += 24;
+
+        long awakeTime = Duration.between(wakeUp, now).toHours();
+        if (awakeTime < 0) awakeTime += 24;
+
+        return sleepTime < 7 && awakeTime >= 14;
     }
 
-    private static boolean hungry (PetWellbeing pet) {
-        LocalTime lastMeal = parseTime(pet.getNutrition().getLastNutritionTime());
+    private static boolean isHungry(PetWellbeing pet) {
+        LocalTime lastMeal = Tools.parseTime(pet.getNutrition().getLastNutritionTime());
         LocalTime now = LocalTime.now();
 
         long hoursPassed = Duration.between(lastMeal, now).toHours();
@@ -40,18 +46,20 @@ public class PetStats {
         return hoursPassed >= 5;
     }
 
-    private static boolean thirsty(PetWellbeing pet) {
-        LocalTime lastDrink = parseTime(pet.getHydration().getLastDrinkTime());
+    private static boolean isThirsty(PetWellbeing pet) {
+        LocalTime lastDrink = Tools.parseTime(pet.getHydration().getLastDrinkTime());
         LocalTime now = LocalTime.now();
+
+        int ml = pet.getHydration().getTotalMl();
 
         long hoursPassed = Duration.between(lastDrink, now).toHours();
         if (hoursPassed < 0) hoursPassed += 24;
 
-        return hoursPassed >= 8;
+        return hoursPassed >= 4 || ml == 0;
     }
 
-    private static boolean restless(PetWellbeing pet) {
-        LocalTime lastExercise = parseTime(pet.getExercise().getLastExerciseTime());
+    private static boolean isRestless(PetWellbeing pet) {
+        LocalTime lastExercise = Tools.parseTime(pet.getExercise().getLastExerciseTime());
         LocalTime now = LocalTime.now();
 
         long hoursPassed = Duration.between(lastExercise, now).toHours();
@@ -59,13 +67,4 @@ public class PetStats {
 
         return pet.getExercise().getLogsToday() == 0 || hoursPassed >= 5;
     }
-
-    private static LocalTime parseTime(String timeStr) {
-        try {
-            return LocalTime.parse(timeStr);
-        } catch (DateTimeParseException e) {
-            return LocalTime.MIDNIGHT;
-        }
-    }
-
 }

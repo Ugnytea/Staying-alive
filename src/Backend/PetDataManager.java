@@ -1,10 +1,17 @@
 package Backend;
 
+import Exceptions.DataNotSavedException;
+import Exceptions.FileNotReadException;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
 /**
+ * Author:
+ * Project: Staying-alive
+ *
+ * ------------------------------------------------------------------------
  * This class handles reading from and writing to the user's data file.
  * It manages all wellness activity logs for the current day,
  * including sleep, meals, hydration, exercise, and tasks.
@@ -21,14 +28,16 @@ public class PetDataManager {
      *
      * @param pet PetWellbeing object which content will be set
      * @return PetWellbeing object converted from HashMap
-     * @throws IOException If an error occurs during file reading
+     * @throws FileNotFoundException If an error occurs during file reading
      */
-    public static PetWellbeing readPetData(PetWellbeing pet) throws IOException {
+    public static PetWellbeing readPetData(PetWellbeing pet) {
         Map<String, String> petHM = new HashMap<>();
         Properties props = new Properties();
 
         try (FileInputStream in = new FileInputStream(PET_FILENAME)) {
             props.load(in);
+        } catch (IOException e) {
+            throw new FileNotReadException();
         }
 
         for (String key : props.stringPropertyNames()) {
@@ -60,9 +69,9 @@ public class PetDataManager {
      * Saves PetWellbeing object converted to HashMap in data file
      *
      * @param pet PetWellbeing object which content will be saved
-     * @throws IOException If an error occurs during writing to file
+     * @throws DataNotSavedException If an error occurs during writing to file
      */
-    public static void savePetData(PetWellbeing pet) throws IOException {
+    public static void savePetData(PetWellbeing pet) {
         Properties props = new Properties();
         props.putAll(toHashMap(pet));
 
@@ -70,7 +79,7 @@ public class PetDataManager {
                 "date.lastSavedDate",
                 "sleep.lastActivity",
                 "sleep.wakeTime",
-                "meals.lastMealTime",
+                "nutrition.lastNutritionTime",
                 "hydration.totalMl",
                 "hydration.lastDrinkTime",
                 "exercise.logsToday",
@@ -83,6 +92,8 @@ public class PetDataManager {
             for (String key : orderedKeys) {
                 writer.println(key + "=" + props.getProperty(key));
             }
+        } catch (IOException e) {
+            throw new DataNotSavedException();
         }
     }
 
@@ -95,7 +106,7 @@ public class PetDataManager {
         hm.put("date.lastSavedDate", pet.getLastSavedDate());
         hm.put("sleep.lastActivity", pet.getSleep().getLastActivity());
         hm.put("sleep.wakeTime", pet.getSleep().getWakeUpTime());
-        hm.put("meals.lastMealTime", pet.getNutrition().getLastNutritionTime());
+        hm.put("nutrition.lastNutritionTime", pet.getNutrition().getLastNutritionTime());
         hm.put("hydration.totalMl", String.valueOf(pet.getHydration().getTotalMl()));
         hm.put("hydration.lastDrinkTime", pet.getHydration().getLastDrinkTime());
         hm.put("exercise.logsToday", String.valueOf(pet.getExercise().getLogsToday()));
