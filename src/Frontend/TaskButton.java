@@ -9,6 +9,9 @@ import java.util.List;
 import Backend.ButtonAction;
 
 /**
+ * Author: adrija.ignataviciute@mf.stud.vu.lt
+ * Project: Staying-alive
+ * ---------------------------------------------------------------------------------
  * TaskButton represents a button that allows the user to manage tasks.
  * The user can add new tasks, view existing tasks or mark tasks as complete.
  */

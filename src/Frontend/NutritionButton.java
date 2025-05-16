@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 /**
+ * Author: adrija.ignataviciute@mf.stud.vu.lt
+ * Project: Staying-alive
+ * ----------------------------------------------------------------------------
  * NutritionButton is a custom JButton that prompts the user to input
  * the time they last ate and updates this information using the backend logic.
  */

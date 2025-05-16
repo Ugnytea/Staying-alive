@@ -2,7 +2,11 @@ package Frontend;
 
 import javax.swing.*;
 import java.awt.*;
+
 /**
+ * Author: adrija.ignataviciute@mf.stud.vu.lt
+ * Project: Staying-alive
+ * ------------------------------------------------------------------------
  * GamePanel is the central panel of the frontend GUI, containing
  * all the interactive buttons that allow the user to track various
  * aspects of their pet's well-being and their own daily habits.

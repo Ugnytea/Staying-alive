@@ -2,7 +2,11 @@ package Frontend;
 
 import javax.swing.*;
 import java.awt.*;
+
 /**
+ * Author: adrija.ignataviciute@mf.stud.vu.lt
+ * Project: Staying-alive
+ * ------------------------------------------------------------------------
  * This class sets up the window, initializes the layout,
  * and provides a method to switch from the start panel to the game panel.
  */

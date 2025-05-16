@@ -1,7 +1,11 @@
 package Frontend;
 
 import javax.swing.*;
+
 /**
+ * Author: adrija.ignataviciute@mf.stud.vu.lt
+ * Project: Staying-alive
+ * ------------------------------------------------------------------------
  * StartButton is a custom JButton that represents the entry point
  * to begin the main game. It displays the "Start Game" label.
  */

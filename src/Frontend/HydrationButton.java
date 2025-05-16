@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
 
 import Backend.ButtonAction;
 /**
+ * Author: adrija.ignataviciute@mf.stud.vu.lt
+ * Project: Staying-alive
+ * ------------------------------------------------------------------------
  * HydrationButton represents a button in the GUI that allows the user
  * to log their water intake. The user inputs the amount of water in ml
  * and the time of intake (in HH:mm format).

@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 /**
+ * Author: adrija.ignataviciute@mf.stud.vu.lt
+ * Project: Staying-alive
+ * ------------------------------------------------------------------------
  * StartPanel is the opening screen of the application.
  * It introduces the game to the user with a message, a description
  * and a button to proceed to the main game panel.

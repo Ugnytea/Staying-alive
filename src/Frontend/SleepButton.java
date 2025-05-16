@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 /**
+ * Author: adrija.ignataviciute@mf.stud.vu.lt
+ * Project: Staying-alive
+ * -----------------------------------------------------------------------------------
  * SleepButton is a custom JButton used to collect and log the user's wake-up time.
  * When clicked, it prompts the user to input the time they woke up (in HH:mm format).
  */
