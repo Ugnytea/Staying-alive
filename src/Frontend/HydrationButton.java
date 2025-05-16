@@ -6,8 +6,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import Backend.ButtonAction;
+import Exceptions.DataNotSavedException;
+
 /**
  * Author: adrija.ignataviciute@mf.stud.vu.lt
  * Project: Staying-alive
@@ -42,19 +45,29 @@ public class HydrationButton extends JButton {
                             }
 
                             int ml = Integer.parseInt(parts[0]);
+                            if (ml < 0 || ml > 4000) {
+                                throw new IllegalArgumentException("Please enter water ml between 0 and 4000 ml.");
+                            }
+
                             String time = parts[1];
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                            LocalTime parsedTime = LocalTime.parse(time, formatter); // will throw if invalid
 
                             ButtonAction.updateHydration(ml, time);
-
                             JOptionPane.showMessageDialog(null, "Hydration updated!\n" +
                                     "You logged " + ml + " ml at " + time + ".");
+
                         } catch (NumberFormatException ex) {
-                            JOptionPane.showMessageDialog(null, "Please enter a numbers without.");
-                        } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+                            JOptionPane.showMessageDialog(null, "Please enter a valid number for milliliters (e.g., 250).");
+                        } catch (DateTimeParseException ex) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Invalid time format.\nUse 24-hour format HH:mm (e.g., 14:30).\nHours: 00–23, Minutes: 00–59.");
+                        } catch (IllegalArgumentException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage());
+                        } catch (DataNotSavedException ex) {
+                            JOptionPane.showMessageDialog(null, "Error: could not save hydration data.");
                         }
                     } else {
-                        //check
                         JOptionPane.showMessageDialog(null, "No input provided.");
                     }
                 }

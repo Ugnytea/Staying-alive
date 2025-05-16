@@ -1,6 +1,7 @@
 package Frontend;
 
 import Backend.ButtonAction;
+import Exceptions.DataNotSavedException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,7 +40,7 @@ public class NutritionButton extends JButton {
                             String time = input.trim();
 
                             if (!time.matches("^([01]?\\d|2[0-3]):[0-5]\\d$")) {
-                                JOptionPane.showMessageDialog(null, "Please enter time in format - HH:mm");
+                                JOptionPane.showMessageDialog(null, "Please enter the time in 24-hour format (HH:mm)");
                                 return;
                             }
 
@@ -49,8 +50,8 @@ public class NutritionButton extends JButton {
                             JOptionPane.showMessageDialog(null, "Information updated!\n");
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(null, "Please enter a number.");
-                        } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+                        } catch (DataNotSavedException ex) {
+                            JOptionPane.showMessageDialog(null, "Error: saving pet's data.");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "No input provided.");

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import Backend.ButtonAction;
+import Exceptions.DataNotSavedException;
 
 /**
  * Author: adrija.ignataviciute@mf.stud.vu.lt
@@ -61,9 +62,11 @@ public class TaskButton extends JButton {
             try {
                 ButtonAction.updateTask(false, task.trim());
                 JOptionPane.showMessageDialog(null, "Task added!");
-            } catch (IOException ex) {
-                showError(ex);
+            } catch (DataNotSavedException ex) {
+                JOptionPane.showMessageDialog(null, "Error: saving data.");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Task cannot be empty.");
         }
     }
 
@@ -79,8 +82,8 @@ public class TaskButton extends JButton {
                 }
                 JOptionPane.showMessageDialog(null, sb.toString());
             }
-        } catch (IOException ex) {
-            showError(ex);
+        } catch (DataNotSavedException ex) {
+            JOptionPane.showMessageDialog(null, "Error: saving pet's data.");
         }
     }
 
@@ -107,8 +110,8 @@ public class TaskButton extends JButton {
                 JOptionPane.showMessageDialog(null, "Completed!");
             }
 
-        } catch (IOException ex) {
-            showError(ex);
+        } catch (DataNotSavedException ex) {
+            JOptionPane.showMessageDialog(null, "Error: saving data.");
         }
     }
 

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import Backend.ButtonAction;
+import Exceptions.DataNotSavedException;
 
 /**
  * Author: adrija.ignataviciute@mf.stud.vu.lt
@@ -19,7 +20,6 @@ import Backend.ButtonAction;
  * It retrieves pet status data from the backend (via ButtonAction)
  * and shows a message dialog summarizing the pet's condition (e.g., tired, hungry).
  */
-
 
 public class CheckUpButton extends JButton {
     /**
@@ -43,8 +43,8 @@ public class CheckUpButton extends JButton {
 
                     JOptionPane.showMessageDialog(null, status.toString());
 
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "Error checking pet status:\n" + ex.getMessage());
+                } catch (DataNotSavedException ex) {
+                    JOptionPane.showMessageDialog(null, "Error saving pet's data.\n" );
                 }
             }
         });

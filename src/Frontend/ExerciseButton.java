@@ -1,6 +1,7 @@
 package Frontend;
 
 import Backend.ButtonAction;
+import Exceptions.DataNotSavedException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,6 @@ import java.time.format.DateTimeFormatter;
  *
  */
 
-
 public class ExerciseButton extends JButton {
     /**
      * Constructs an ExerciseButton labeled "Exercise".
@@ -31,24 +31,27 @@ public class ExerciseButton extends JButton {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String input = JOptionPane.showInputDialog(null, " Did You exercise?");
+                String input = JOptionPane.showInputDialog(null, " Did You exercise? 'yes' or 'no'");
 
-                if (input != null && !input.trim().isEmpty()) {
-                    String answer = input.trim().toLowerCase();
-                    if (answer.equals("yes")) {
-                        try {
-                            String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-
-                            ButtonAction.updateExercise(time);
-                            JOptionPane.showMessageDialog(null, "Exercise logged at " + time + "!");
-                            JOptionPane.showMessageDialog(null, "Information updated!\n");
-                        } catch (NumberFormatException ex) {
-                            JOptionPane.showMessageDialog(null, "Please enter 'yes' or 'no'.");
-                        } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+                if (input != null) {
+                    input = input.trim();
+                    if (!input.isEmpty()) {
+                        String answer = input.toLowerCase();
+                        if (answer.equals("yes")) {
+                            try {
+                                String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                                ButtonAction.updateExercise(time);
+                                JOptionPane.showMessageDialog(null, "Exercise logged at " + time + "!");
+                            } catch (NumberFormatException ex) {
+                                JOptionPane.showMessageDialog(null, "Please enter 'yes' or 'no'.");
+                            } catch (DataNotSavedException ex) {
+                                JOptionPane.showMessageDialog(null, "Error: saving pet's data.");
+                            }
+                        } else if (answer.equals("no")) {
+                            JOptionPane.showMessageDialog(null, "No exercise logged.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Input is not correct, it has to be 'yes' or 'no'.");
                         }
-                    } else if (answer.equals("no")) {
-                        JOptionPane.showMessageDialog(null, "No exercise logged.");
                     } else {
                         JOptionPane.showMessageDialog(null, "No input provided.");
                     }

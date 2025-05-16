@@ -1,6 +1,7 @@
 package Frontend;
 
 import Backend.ButtonAction;
+import Exceptions.DataNotSavedException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -35,7 +36,7 @@ public class SleepButton extends JButton {
 
                         // check if time is proper
                             if (!input.matches("^([01]?\\d|2[0-3]):[0-5]\\d$")) {
-                                JOptionPane.showMessageDialog(null, "Please enter time in format - HH:mm");
+                                JOptionPane.showMessageDialog(null, "\"Please enter the time in 24-hour format (HH:mm)\"");
                                 return;
                             }
 
@@ -43,8 +44,8 @@ public class SleepButton extends JButton {
                         ButtonAction.updateSleep(time);
 
                         JOptionPane.showMessageDialog(null, "Wake-up time saved successfully!");
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Error saving data: " + ex.getMessage());
+                        } catch (DataNotSavedException ex) {
+                            JOptionPane.showMessageDialog(null, "Error: saving pet's data.");
                     }
                      } else {
                     JOptionPane.showMessageDialog(null, "No input provided.");
