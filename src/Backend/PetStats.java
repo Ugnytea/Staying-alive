@@ -5,7 +5,23 @@ import java.time.LocalTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Author: ugne.stankeviciute@mif.stud.vu.lt
+ * Project: Staying-alive
+ *
+ * ------------------------------------------------------------------------
+ * Evaluates the wellness status of the pet based on activity data.
+ * Contains logic to check if the pet is tired, hungry, thirsty, or restless.
+ * Provides status data to be used in the frontend.
+ */
 public class PetStats {
+    /**
+     * Evaluates and returns the current status of the pet.
+     * Each entry in the returned map indicates whether a specific condition (e.g., tired) is currently true.
+     *
+     * @param pet PetWellbeing object which content will be set
+     * @return Map of status flags (e.g., "tired" → true)
+     */
     public static Map<String, Boolean> checkStats(PetWellbeing pet) {
         Map<String, Boolean> stats = new LinkedHashMap<>();
 

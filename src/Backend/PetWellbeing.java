@@ -3,6 +3,15 @@ package Backend;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Author: ugne.stankeviciute@mif.stud.vu.lt
+ * Project: Staying-alive
+ *
+ * ------------------------------------------------------------------------
+ * JavaBean class representing the wellbeing data of the pet.
+ * Stores all key metrics related to sleep, meals, hydration, exercise, and tasks.
+ * Used as a data structure for saving/loading wellness information.
+ */
 public class PetWellbeing {
 
     private String lastSavedDate = "0000-00-00";
@@ -12,7 +21,7 @@ public class PetWellbeing {
     private Exercise exercise = new Exercise();
     private List<String> tasks = new ArrayList<>();
 
-    //Getters and Setters
+    // Getters and Setters
     public String getLastSavedDate() {
         return lastSavedDate;
     }
@@ -61,7 +70,7 @@ public class PetWellbeing {
         this.tasks = tasks;
     }
 
-    //=== Inner Classes ===
+    // === Inner Classes ===
 
     public static class Sleep {
         private String lastActivity = "00:00";

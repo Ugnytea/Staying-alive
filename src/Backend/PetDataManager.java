@@ -8,11 +8,11 @@ import java.time.LocalDate;
 import java.util.*;
 
 /**
- * Author:
+ * Author: ugne.stankeviciute@mif.stud.vu.lt
  * Project: Staying-alive
  *
  * ------------------------------------------------------------------------
- * This class handles reading from and writing to the user's data file.
+ * This class handles reading from and writing to the pet's data file.
  * It manages all wellness activity logs for the current day,
  * including sleep, meals, hydration, exercise, and tasks.
  *

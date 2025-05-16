@@ -7,16 +7,23 @@ import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * Author: ugne.stankeviciute@mif.stud.vu.lt
+ * Project: Staying-alive
+ *
+ * ------------------------------------------------------------------------
+ * Utility class for common helper functions used across the backend.
+ * Provides methods for safely parsing time strings and resetting pet data for a new day.
+ */
 public class Tools {
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("H:mm");
 
     /**
-     * Parses a time string in the format "HH:mm" into an object.
-     * If the input string is invalid or cannot be parsed, it safely returns {@code LocalTime.MIDNIGHT} as a fallback.
+     * Parses a time string in the format "HH:mm" or "H:mm" into an object.
+     * If the input string is invalid or cannot be parsed, it safely returns LocalTime.MIDNIGHT as a fallback.
      *
-     * @param timeStr String of the time to parse (expected format: "HH:mm")
-     * @return the parsed object, or {@code LocalTime.MIDNIGHT} if parsing fails
+     * @param timeStr String of the time to parse
+     * @return Parsed object, or LocalTime.MIDNIGHT if parsing fails
      */
     public static LocalTime parseTime(String timeStr) {
         try {
@@ -27,7 +34,8 @@ public class Tools {
     }
 
     /**
-     * Checks if it's a new day and resets data if necessary
+     * Checks if a new day has started since the last saved date.
+     * If a new day is detected, resets relevant pet data.
      *
      * @param pet PetWellbeing object which content will be reset
      */

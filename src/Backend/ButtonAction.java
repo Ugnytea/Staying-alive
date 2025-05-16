@@ -1,12 +1,17 @@
 package Backend;
 
-import java.io.IOException;
+import Exceptions.DataNotSavedException;
+import Exceptions.FileNotReadException;
 import java.util.List;
 import java.util.Map;
 
 /**
- * This is the main back-end class that gets called by front-end
+ * Author: ugne.stankeviciute@mif.stud.vu.lt
+ * Project: Staying-alive
  *
+ * ------------------------------------------------------------------------
+ * Connects the frontend and backend.
+ * Triggers updates to a specific wellness stat or returns the pet's current statuses.
  */
 
 public class ButtonAction {
@@ -14,7 +19,8 @@ public class ButtonAction {
      * Updates the time user woke up
      *
      * @param time String of time at which user woke up
-     * @throws IOException If an error occurs during file reading or writing to it
+     * @throws FileNotReadException If an error occurs during file reading
+     * @throws DataNotSavedException If an error occurs while writing to file
      */
     public static void updateSleep(String time) {
         PetWellbeing pet = new PetWellbeing();
@@ -29,7 +35,8 @@ public class ButtonAction {
      * Updates the time user last ate
      *
      * @param time String of time at which user ate
-     * @throws IOException If an error occurs during file reading or writing to it
+     * @throws FileNotReadException If an error occurs during file reading
+     * @throws DataNotSavedException If an error occurs while writing to file
      */
     public static void updateNutrition(String time) {
         PetWellbeing pet = new PetWellbeing();
@@ -45,7 +52,8 @@ public class ButtonAction {
      *
      * @param ml Integer of how much ml user had to drink
      * @param time String of time at which user had a drink
-     * @throws IOException If an error occurs during file reading or writing to it
+     * @throws FileNotReadException If an error occurs during file reading
+     * @throws DataNotSavedException If an error occurs while writing to file
      */
     public static void updateHydration(int ml,String time) {
         PetWellbeing pet = new PetWellbeing();
@@ -62,7 +70,8 @@ public class ButtonAction {
     /**
      * Updates how many times user had exercised during the day
      *
-     * @throws IOException If an error occurs during file reading or writing to it
+     * @throws FileNotReadException If an error occurs during file reading
+     * @throws DataNotSavedException If an error occurs while writing to file
      */
     public static void updateExercise(String time) {
         PetWellbeing pet = new PetWellbeing();
@@ -81,7 +90,8 @@ public class ButtonAction {
      *
      * @param finished Boolean of if the passed task is finished (to be deleted) or new (to be added)
      * @param task String of specific task to add to or remove from list
-     * @throws IOException If an error occurs during file reading or writing to it
+     * @throws FileNotReadException If an error occurs during file reading
+     * @throws DataNotSavedException If an error occurs while writing to file
      */
     public static void updateTask(boolean finished, String task) {
         PetWellbeing pet = new PetWellbeing();
@@ -102,7 +112,8 @@ public class ButtonAction {
      * Gives to-do list
      *
      * @return A list of tasks
-     * @throws IOException If an error occurs during file reading or writing to it
+     * @throws FileNotReadException If an error occurs during file reading
+     * @throws DataNotSavedException If an error occurs while writing to file
      */
     public static List<String> getTasks() {
         PetWellbeing pet = new PetWellbeing();
@@ -115,7 +126,7 @@ public class ButtonAction {
      * Gets all pet's statistics in a list
      *
      * @return A list of pet's statistics in order of: if hungry, thirsty, tired, restless
-     * @throws IOException If an error occurs during file reading
+     * @throws FileNotReadException If an error occurs during file reading
      */
     public static Map<String, Boolean> checkOnPet () {
         PetWellbeing pet = new PetWellbeing();
