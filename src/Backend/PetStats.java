@@ -25,6 +25,8 @@ public class PetStats {
         LocalTime wakeUp = Tools.parseTime(wakeUpTime);
         LocalTime now = LocalTime.now();
 
+        if (fellAsleep == wakeUp) return true;
+
         long sleepTime = Duration.between(fellAsleep, wakeUp).toHours();
         if (sleepTime < 0) sleepTime += 24;
 

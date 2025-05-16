@@ -16,7 +16,7 @@ public class ButtonAction {
      * @param time String of time at which user woke up
      * @throws IOException If an error occurs during file reading or writing to it
      */
-    public static void updateSleep(String time) throws IOException {
+    public static void updateSleep(String time) {
         PetWellbeing pet = new PetWellbeing();
         prepToLogAction(pet);
 
@@ -31,7 +31,7 @@ public class ButtonAction {
      * @param time String of time at which user ate
      * @throws IOException If an error occurs during file reading or writing to it
      */
-    public static void updateNutrition(String time) throws IOException {
+    public static void updateNutrition(String time) {
         PetWellbeing pet = new PetWellbeing();
         prepToLogAction(pet);
 
@@ -47,7 +47,7 @@ public class ButtonAction {
      * @param time String of time at which user had a drink
      * @throws IOException If an error occurs during file reading or writing to it
      */
-    public static void updateHydration(int ml,String time) throws IOException {
+    public static void updateHydration(int ml,String time) {
         PetWellbeing pet = new PetWellbeing();
         prepToLogAction(pet);
 
@@ -64,7 +64,7 @@ public class ButtonAction {
      *
      * @throws IOException If an error occurs during file reading or writing to it
      */
-    public static void updateExercise(String time) throws IOException {
+    public static void updateExercise(String time) {
         PetWellbeing pet = new PetWellbeing();
         prepToLogAction(pet);
 
@@ -83,7 +83,7 @@ public class ButtonAction {
      * @param task String of specific task to add to or remove from list
      * @throws IOException If an error occurs during file reading or writing to it
      */
-    public static void updateTask(boolean finished, String task) throws IOException {
+    public static void updateTask(boolean finished, String task) {
         PetWellbeing pet = new PetWellbeing();
         prepToLogAction(pet);
 
@@ -104,7 +104,7 @@ public class ButtonAction {
      * @return A list of tasks
      * @throws IOException If an error occurs during file reading or writing to it
      */
-    public static List<String> getTasks() throws IOException {
+    public static List<String> getTasks() {
         PetWellbeing pet = new PetWellbeing();
         prepToLogAction(pet);
 
@@ -117,7 +117,7 @@ public class ButtonAction {
      * @return A list of pet's statistics in order of: if hungry, thirsty, tired, restless
      * @throws IOException If an error occurs during file reading
      */
-    public static Map<String, Boolean> checkOnPet () throws IOException {
+    public static Map<String, Boolean> checkOnPet () {
         PetWellbeing pet = new PetWellbeing();
 
         prepToLogAction(pet);
@@ -125,7 +125,7 @@ public class ButtonAction {
         return PetStats.checkStats(pet);
     }
 
-    private static void prepToLogAction (PetWellbeing pet) throws IOException {
+    private static void prepToLogAction (PetWellbeing pet) {
         PetDataManager.readPetData(pet);
         Tools.checkIfNewDay(pet);
     }

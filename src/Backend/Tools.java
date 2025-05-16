@@ -1,14 +1,16 @@
 package Backend;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.List;
 
 
 public class Tools {
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("H:mm");
+
     /**
      * Parses a time string in the format "HH:mm" into an object.
      * If the input string is invalid or cannot be parsed, it safely returns {@code LocalTime.MIDNIGHT} as a fallback.
@@ -18,7 +20,7 @@ public class Tools {
      */
     public static LocalTime parseTime(String timeStr) {
         try {
-            return LocalTime.parse(timeStr);
+            return LocalTime.parse(timeStr, TIME_FORMAT);
         } catch (DateTimeParseException e) {
             return LocalTime.MIDNIGHT;
         }
@@ -29,7 +31,7 @@ public class Tools {
      *
      * @param pet PetWellbeing object which content will be reset
      */
-    public static void checkIfNewDay(PetWellbeing pet) throws IOException {
+    public static void checkIfNewDay(PetWellbeing pet) {
         LocalDate now = LocalDate.now();
 
         String lastSavedDate = pet.getLastSavedDate();
@@ -39,7 +41,7 @@ public class Tools {
         }
     }
 
-    private static void resetPetStats(PetWellbeing pet) throws IOException {
+    private static void resetPetStats(PetWellbeing pet) {
         // Updates pet's lastSavedDate to current date
         pet.setLastSavedDate(LocalDate.now().toString());
         // Updates pet's lastSavedDate to current date
