@@ -31,7 +31,7 @@ public class HydrationButton extends JButton {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Ask for ml of water
-                String input = JOptionPane.showInputDialog(null, "How much water did You drink (ml) and when (HH:mm)?\nExample: 250 14:30");
+                String input = JOptionPane.showInputDialog(null, "How much water did You drink (ml) and when (HH:mm)?\n (e. g., 250 14:30)");
                 if (input != null) {
                     input = input.trim();
 
@@ -61,7 +61,7 @@ public class HydrationButton extends JButton {
                             JOptionPane.showMessageDialog(null, "Please enter a valid number for milliliters (e.g., 250).");
                         } catch (DateTimeParseException ex) {
                             JOptionPane.showMessageDialog(null,
-                                    "Invalid time format.\nUse 24-hour format HH:mm (e.g., 14:30).\nHours: 00–23, Minutes: 00–59.");
+                                    "Invalid time format.\nUse 24 hour format HH:mm (e.g., 14:30).\nHours: 00–23, Minutes: 00–59.");
                         } catch (IllegalArgumentException ex) {
                             JOptionPane.showMessageDialog(null, ex.getMessage());
                         } catch (DataNotSavedException ex) {
