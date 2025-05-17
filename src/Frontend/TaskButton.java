@@ -1,9 +1,8 @@
 package Frontend;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.List;
 
 import Backend.ButtonAction;
@@ -17,12 +16,55 @@ import Exceptions.DataNotSavedException;
  * The user can add new tasks, view existing tasks or mark tasks as complete.
  */
 public class TaskButton extends JButton {
+    private final Color baseColor = new Color(195, 177, 225);    // pastel purple
+    private final Color hoverColor = new Color(180, 165, 210);   // slightly darker
+    private final Color pressColor = new Color(160, 150, 190);   // even darker
+
     /**
      * Constructs the TaskButton and adds an action listener that presents the user
-     * with options to manage tasks.
+     * with options to manage tasks. Also adds mouse listeners for pumpiness effect.
      */
     public TaskButton() {
         super("Tasks");
+        setFont(new Font("SansSerif", Font.BOLD, 16));
+        setBackground(baseColor);
+        setOpaque(true);
+        setBorder(BorderFactory.createBevelBorder(1));
+        setFocusPainted(false);
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setBackground(hoverColor);
+                setBorder(BorderFactory.createBevelBorder(1, Color.WHITE, Color.GRAY));
+                setBounds(getX() - 1, getY() - 1, getWidth() + 2, getHeight() + 2); // pop out effect
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setBackground(baseColor);
+                setBorder(BorderFactory.createBevelBorder(1));
+                setBounds(getX() + 1, getY() + 1, getWidth() - 2, getHeight() - 2); // reset size
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setBackground(pressColor);
+                setBounds(getX() + 1, getY() + 1, getWidth() - 2, getHeight() - 2); // press in effect
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (contains(e.getPoint())) {
+                    setBackground(hoverColor);
+                    setBounds(getX() - 1, getY() - 1, getWidth() + 2, getHeight() + 2); // back to pop out
+                } else {
+                    setBackground(baseColor);
+                    setBorder(BorderFactory.createBevelBorder(1));
+                    setBounds(getX() + 1, getY() + 1, getWidth() - 2, getHeight() - 2); // reset size
+                }
+            }
+        });
 
         addActionListener(new ActionListener() {
             @Override

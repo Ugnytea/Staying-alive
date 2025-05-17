@@ -36,11 +36,34 @@ public class StartPanel extends JPanel {
         info.setBounds(100, 150, 400, 50);
         add(info);
 
-        // Start Button
         JButton startButton = new JButton("Start Game");
-        startButton.setFont(new Font("Monospaced", Font.PLAIN, 18));
+        startButton.setFont(new Font("Monospaced", Font.BOLD, 18));
         startButton.setBounds(200, 230, 200, 50);
         startButton.setForeground(Color.RED);
+        startButton.setBackground(new Color(255, 80, 80));
+        startButton.setFocusPainted(false);
+        startButton.setBorder(BorderFactory.createBevelBorder(1)); // 3D bevel border
+
+        startButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                startButton.setBackground(new Color(255, 100, 100)); // lighter on hover
+                startButton.setBounds(198, 228, 204, 54); // slightly larger (pop effect)
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                startButton.setBackground(new Color(255, 80, 80)); // original color
+                startButton.setBounds(200, 230, 200, 50); // original size
+            }
+
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                startButton.setBounds(202, 232, 196, 46); // mimic press-in effect
+            }
+
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                startButton.setBounds(198, 228, 204, 54); // back to hover-pump
+            }
+        });
+
         add(startButton);
 
 
