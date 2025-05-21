@@ -44,7 +44,7 @@ public class StartPanel extends JPanel {
 
         startButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                startButton.setBackground(new Color(255, 100, 100)); // lighter on hover
+                startButton.setBackground(new Color(255, 80, 80)); // lighter on hover
                 startButton.setBounds(198, 228, 204, 54); // slightly larger (pop effect)
             }
 
