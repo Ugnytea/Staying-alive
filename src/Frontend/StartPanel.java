@@ -39,7 +39,6 @@ public class StartPanel extends JPanel {
         JButton startButton = new JButton("Start Game");
         startButton.setFont(new Font("Monospaced", Font.BOLD, 18));
         startButton.setBounds(200, 230, 200, 50);
-        startButton.setForeground(Color.RED);
         startButton.setFocusPainted(false);
         startButton.setBorder(BorderFactory.createBevelBorder(1)); // 3D bevel border
 
