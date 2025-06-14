@@ -15,6 +15,7 @@ import java.util.List;
  * Utility class for common helper functions used across the backend.
  * Provides methods for safely parsing time strings and resetting pet data for a new day.
  */
+
 public class Tools {
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("H:mm");
 
@@ -72,5 +73,4 @@ public class Tools {
 
         return latest.toString();
     }
-
 }

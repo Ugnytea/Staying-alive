@@ -1,6 +1,10 @@
 package Exceptions;
 
 /**
+ * Author: ugne.stankeviciute@mif.stud.vu.lt
+ * Project: Staying-alive
+ *
+ * ------------------------------------------------------------------------
  * Custom exception for when a file couldn't be read
  */
 public class FileNotReadException extends RuntimeException {

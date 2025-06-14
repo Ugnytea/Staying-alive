@@ -14,6 +14,7 @@ import java.util.Map;
  * Contains logic to check if the pet is tired, hungry, thirsty, or restless.
  * Provides status data to be used in the frontend.
  */
+
 public class PetStats {
     /**
      * Evaluates and returns the current status of the pet.

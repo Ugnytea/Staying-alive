@@ -12,6 +12,7 @@ import java.util.List;
  * Stores all key metrics related to sleep, meals, hydration, exercise, and tasks.
  * Used as a data structure for saving/loading wellness information.
  */
+
 public class PetWellbeing {
 
     private String lastSavedDate = "0000-00-00";
