@@ -35,16 +35,15 @@ public class PetDataManager {
         Map<String, String> petHM = new HashMap<>();
         Properties props = new Properties();
 
-        try (FileInputStream mainInput = new FileInputStream(PET_FILENAME)) {
-            props.load(mainInput);
+        try (FileInputStream mainReader = new FileInputStream(PET_FILENAME)) {
+            props.load(mainReader);
         } catch (IOException e1) {
-            try (FileInputStream backupInput = new FileInputStream(PET_BACKUP_FILENAME)) {
-                props.load(backupInput);
+            try (FileInputStream backupReader = new FileInputStream(PET_BACKUP_FILENAME)) {
+                props.load(backupReader);
             } catch (IOException e2) {
                 throw new FileNotReadException();
             }
         }
-
 
         for (String key : props.stringPropertyNames()) {
             petHM.put(key, props.getProperty(key));
@@ -93,13 +92,20 @@ public class PetDataManager {
                 "tasks"
         );
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(PET_FILENAME))) {
-            writer.println("# Pet Wellbeing Data (Auto Saved)");
+        try (PrintWriter mainWriter = new PrintWriter(new FileWriter(PET_FILENAME))) {
+            mainWriter.println("# Pet Wellbeing Data (Auto Saved)");
             for (String key : orderedKeys) {
-                writer.println(key + "=" + props.getProperty(key));
+                mainWriter.println(key + "=" + props.getProperty(key));
             }
-        } catch (IOException e) {
-            throw new DataNotSavedException();
+        } catch (IOException e1) {
+            try (PrintWriter backupWriter = new PrintWriter(new FileWriter(PET_BACKUP_FILENAME))) {
+                backupWriter.println("# Pet Wellbeing Data (Auto Saved)");
+                for (String key : orderedKeys) {
+                    backupWriter.println(key + "=" + props.getProperty(key));
+                }
+            } catch (IOException e2) {
+                throw new DataNotSavedException();
+            }
         }
     }
 
