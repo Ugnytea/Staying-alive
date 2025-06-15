@@ -22,6 +22,7 @@ import java.util.*;
 
 public class PetDataManager {
     static final String PET_FILENAME = "Staying-alive/src/Backend/PetsWellbeingTracker.properties";
+    static final String PET_BACKUP_FILENAME = "src/Backend/PetsWellbeingTracker.properties";
 
     /**
      * Gets properties (key=values) from data file and turns it into HashMap
@@ -34,11 +35,16 @@ public class PetDataManager {
         Map<String, String> petHM = new HashMap<>();
         Properties props = new Properties();
 
-        try (FileInputStream in = new FileInputStream(PET_FILENAME)) {
-            props.load(in);
-        } catch (IOException e) {
-            throw new FileNotReadException();
+        try (FileInputStream mainInput = new FileInputStream(PET_FILENAME)) {
+            props.load(mainInput);
+        } catch (IOException e1) {
+            try (FileInputStream backupInput = new FileInputStream(PET_BACKUP_FILENAME)) {
+                props.load(backupInput);
+            } catch (IOException e2) {
+                throw new FileNotReadException();
+            }
         }
+
 
         for (String key : props.stringPropertyNames()) {
             petHM.put(key, props.getProperty(key));
