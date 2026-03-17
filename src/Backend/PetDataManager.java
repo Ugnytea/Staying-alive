@@ -21,7 +21,7 @@ import java.util.*;
  */
 
 public class PetDataManager {
-    static final String PET_FILENAME = "Staying-alive/src/Backend/PetsWellbeingTracker.properties";
+    static final String PET_FILENAME = "Backend/PetsWellbeingTracker.properties";
     static final String PET_BACKUP_FILENAME = "src/Backend/PetsWellbeingTracker.properties";
 
     /**
@@ -29,16 +29,16 @@ public class PetDataManager {
      *
      * @param pet PetWellbeing object which content will be set
      * @return PetWellbeing object converted from HashMap
-     * @throws FileNotFoundException If an error occurs during file reading
+     * @throws FileNotReadException If an error occurs during file reading
      */
     public static PetWellbeing readPetData(PetWellbeing pet) {
         Map<String, String> petHM = new HashMap<>();
         Properties props = new Properties();
 
-        try (FileInputStream mainReader = new FileInputStream(PET_FILENAME)) {
+        try (FileInputStream mainReader = new FileInputStream(new File(System.getProperty("user.dir"), PET_FILENAME))) {
             props.load(mainReader);
         } catch (IOException e1) {
-            try (FileInputStream backupReader = new FileInputStream(PET_BACKUP_FILENAME)) {
+            try (FileInputStream backupReader = new FileInputStream(new File(System.getProperty("user.dir"), PET_BACKUP_FILENAME))) {
                 props.load(backupReader);
             } catch (IOException e2) {
                 throw new FileNotReadException();
