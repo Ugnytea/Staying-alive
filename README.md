@@ -42,3 +42,28 @@ java Main.java
 - Java
 - Java Swing
 
+---
+
+## Team & Contributions
+
+This project was developed as a collaborative effort by a team of 2.
+
+### Adrija Ig - Frontend developer
+
+**Responsibilities:**
+- Java Swing GUI design and implementation
+- User interface components
+- User interaction handling
+
+**GitHub:** [adriukas](https://github.com/adriukas)
+
+
+### Ugnė Stankevičiūtė - Backend developer
+
+**Responsibilities:**
+- Backend architecture and logic
+- Database design and integration
+- Habit tracking system implementation
+- Virtual pet health calculation algorithm
+
+**GitHub:** [Ugnytea](https://github.com/Ugnytea)
